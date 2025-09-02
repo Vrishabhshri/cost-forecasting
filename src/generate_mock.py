@@ -1,6 +1,6 @@
 import numpy as np, pandas as pd 
 from datetime import datetime 
-rng = np.random_default_rng(42)
+rng = np.random.default_rng(42)
 
 start, end = "2022-01-01", "2024-12-31"
 dates = pd.date_range(start, end, freq="D")
@@ -28,12 +28,12 @@ for d in dates:
             units = 1 if cpt != "36415" else rng.integers(1, 3)
             charge = {"99213": 120, "99214": 180, "93000": 70, "70450": 650, "36415": 20}[cpt] * units
             payer = rng.choice(["COMM", "MEDICARE", "MEDICAID"], p = [0.55, 0.3, 0.15])
-            denial = rng.random() < (0.06 if payer = "COMM" else 0.08 if payer == "MEDICARE" else 0.12)
+            denial = rng.random() < (0.06 if payer == "COMM" else 0.08 if payer == "MEDICARE" else 0.12)
             paid = 0 if denial else charge * rng.uniform(0.5, 0.9)
             rows.append([f"C{rng.integers(10**9)}", rng.integers(10**7), d, pr, f"PROV{rng.integers(200)}",
                         cpt, units, round(charge, 2), round(paid, 2), int(denial), payer, "OFFICE"])
             
-claims = pd.DateFrame(rows, columns = ["claim_id", "patient_id", "service_date", "practice_id", "provider_id", "cpt_code",
+claims = pd.DataFrame(rows, columns = ["claim_id", "patient_id", "service_date", "practice_id", "provider_id", "cpt_code",
                                         "units", "charge_amount", "paid_amount", "denial_flag", "payer", "place_of_service"])
 
 claims.to_csv("data/raw/claims.csv", index=False)
