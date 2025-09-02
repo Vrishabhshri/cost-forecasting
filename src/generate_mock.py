@@ -7,7 +7,7 @@ log = get_logger("mock")
 
 def generate_claims(start = START_DATE, end = END_DATE):
     rng = np.random.default_rng(RANDOM_SEED)
-    dates = pd.date_range(start, end, freq="D")
+    dates = pd.date_range(start, end, freq = "D")
     practices = ["PRA1", "PRA2", "PRA3"]
     cpts = ["99213","99214","93000","70450","36415"]
 
