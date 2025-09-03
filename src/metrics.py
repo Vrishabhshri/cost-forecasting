@@ -12,6 +12,6 @@ def smape(y, yhat):
     return 100 * np.mean(np.abs(yhat - y) / den)
 
 def wape(y, yhat):
-    y, yhat = np.array(y)
+    y, yhat = np.array(y), np.array(yhat)
     return 100 * np.sum(np.abs(yhat - y)) / np.maximum(1e-8, np.sum(np.abs(y)))
 

@@ -1,6 +1,7 @@
 import sqlite3, pandas as pd
+from pathlib import Path
 from .config import DB_PATH, RAW_DIR 
-from .utils import ensure_dirs get_logger
+from .utils import ensure_dirs, get_logger
 
 log = get_logger("db")
 
@@ -25,6 +26,6 @@ def main():
     con.close()
     log.info("Loaded claims & calendar into %s", DB_PATH)
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     from pathlib import Path 
     main()

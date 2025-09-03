@@ -25,13 +25,13 @@ def generate_claims(start = START_DATE, end = END_DATE):
             base = 26 if pr == "PRA1" else 18 if pr == "PRA2" else 12
             vol = rng.poisson(lam = max(0.1, base * year_factor * season * weekday * flu))
 
-            for _ in range(day_vol):
+            for _ in range(vol):
 
                 cpt = rng.choice(cpts, p = [0.3, 0.3, 0.15, 0.15, 0.1])
                 units = 1 if cpt != "36415" else rng.integers(1, 3)
                 charge = {"99213": 120, "99214": 180, "93000": 70, "70450": 650, "36415": 20}[cpt] * units
                 payer = rng.choice(["COMM", "MEDICARE", "MEDICAID"], p = [0.55, 0.3, 0.15])
-                denial = int(rng.random() < (0.06 if payer = "COMM" else 0.08 if payer = "MEDICARE" else 0.12))
+                denial = int(rng.random() < (0.06 if payer == "COMM" else 0.08 if payer == "MEDICARE" else 0.12))
                 paid = 0 if denial else charge * rng.uniform(0.5, 0.9)
                 rows.append([f"C{rng.integers(10**9)}", rng.integers(10**7), d.date().isoformat(), pr, f"PROV{rng.integers(200)}",
                             cpt, int(units), round(charge, 2), round(paid, 2), int(denial), payer, "OFFICE"])

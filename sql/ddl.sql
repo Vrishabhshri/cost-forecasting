@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS claims (
     place_of_service TEXT NOT NULL
 );
 
-CREATE INDEX claims_service_practice_idx ON claims (service_date, practice_id);
+CREATE INDEX IF NOT EXISTS claims_service_practice_idx ON claims (service_date, practice_id);
 
-CREATE TABLE calendar (
+CREATE TABLE IF NOT EXISTS calendar (
     date TEXT PRIMARY KEY,
     is_weekend INTEGER NOT NULL CHECK (is_weekend in (0, 1)),
     month INTEGER NOT NULL CHECK (month BETWEEN 1 AND 12),
