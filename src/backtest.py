@@ -30,8 +30,8 @@ def rolling_backtest(df, horizon = 28):
             if len(window) < horizon: break
 
             up_to = pd.concat([train, test.iloc[:start_idx]], axis = 0)
-            axis_cols = ["dow", "is_holiday", "flu_season_flag", "paid_lag1", "paid_lag7", "paid_lag28"]
-            up_to = up_tp.dropna(subset = ["paid_lag1", "paid_lag7", "paid_lag28"])
+            axis_cols = ["dow", "is_holiday", "flu_season_flag", "paid_lag1", "paid_lag7", "paid_roll28"]
+            up_to = up_tp.dropna(subset = ["paid_lag1", "paid_lag7", "paid_roll28"])
             if len(up_to) < 60:
                 start_idx += horizon; continue
             mod = SARIMAX(
